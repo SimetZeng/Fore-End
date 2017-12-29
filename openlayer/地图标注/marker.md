@@ -50,15 +50,15 @@ let clusters = new ol.layer.Vector({
     source: clusterSource,
     style: funtion (feature, resolution) {
         let size = feature.get('features').length;//当前聚合的点个数
-	      let style = styleCache[size];
-				let imgSrc = 'singleMark.png';
-				let fill = new ol.style.Fill({color: '#d81e06'});//文本填充样式
-				let offsetY = -18;
-				if (size > 1) {
-						imgSrc = 'cluster.png';
-						fill = new ol.style.Fill({color: 'black'});
-						offsetY = -15;
-				}
+        let style = styleCache[size];
+        let imgSrc = 'singleMark.png';
+        let fill = new ol.style.Fill({color: '#d81e06'});//文本填充样式
+        let offsetY = -18;
+	      if (size > 1) {
+	          imgSrc = 'cluster.png';
+	          fill = new ol.style.Fill({color: 'black'});
+	          offsetY = -15;
+    }
 				if (!style) {
 					style = [new ol.style.Style({
 						image: new ol.style.Icon(({
@@ -109,14 +109,6 @@ map.addLayer(vectorLayer);
       projection: 'EPSG:4326',
       center: [0, 0],
       zoom: 10
-    <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [地图打点](#地图打点)
-- [概述](#概述)
-	- [Vector Labels](#vector-labels)
-	- [Overlay Labels](#overlay-labels)
-
-<!-- /TOC -->})
   });
 
   // 下面把上面的图标附加到地图上，需要一个ol.Overlay
@@ -128,4 +120,4 @@ map.addLayer(vectorLayer);
   mapObj.addOverlay(marker);
 </script>
 ```
-<!-- [sdsd](./README.md) -->
+<!-- [README](./README.md) -->
