@@ -1,6 +1,5 @@
 # 地图打点
 
-***
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [地图打点](#地图打点)
@@ -40,8 +39,8 @@ vectorSource.addFeature(iconFeature);
 //添加以下这段可实现聚合功能
 //聚合标记数据源
 let clusterSource = new ol.source.cluster({
-		distance: 40,//聚合的距离，当大于等于这个值时图标聚合
-		source: vectorSource
+    distance: 40,//聚合的距离，当大于等于这个值时图标聚合
+    source: vectorSource
 });
 
 let styleCache = {};
@@ -54,32 +53,32 @@ let clusters = new ol.layer.Vector({
         let imgSrc = 'singleMark.png';
         let fill = new ol.style.Fill({color: '#d81e06'});//文本填充样式
         let offsetY = -18;
-	      if (size > 1) {
-	          imgSrc = 'cluster.png';
-	          fill = new ol.style.Fill({color: 'black'});
-	          offsetY = -15;
+        if (size > 1) {
+            imgSrc = 'cluster.png';
+            fill = new ol.style.Fill({color: 'black'});
+            offsetY = -15;
+        }
+        if (!style) {
+            style = [new ol.style.Style({
+                image: new ol.style.Icon(({
+                    anchor: [0.5, 0.5],
+                    anchorOrigin: 'bottom-left',
+                    anchorXUnits: 'fraction',
+                    anchorYUnits: 'pixels',
+                    offsetOrigin: 'bottom-left',
+                    src: imgSrc
+                })),
+                text: new ol.style.Text({
+                    offsetY: offsetY,
+                    textAlign: 'center',
+                    textBaseline: 'bottom',
+                    font: 'bold 14px 微软雅黑',
+                    text: size.toString(),
+                    fill: fill
+                })
+            })];
+        }
     }
-				if (!style) {
-					style = [new ol.style.Style({
-						image: new ol.style.Icon(({
-								anchor: [0.5, 0.5],
-								anchorOrigin: 'bottom-left',
-								anchorXUnits: 'fraction',
-								anchorYUnits: 'pixels',
-								offsetOrigin: 'bottom-left',
-								src: imgSrc
-						})),
-						text: new ol.style.Text({
-								offsetY: offsetY,
-								textAlign: 'center',
-								textBaseline: 'bottom',
-								font: 'bold 14px 微软雅黑',
-								text: size.toString(),
-								fill: fill
-						})
-					})];
-				}
-		}
 });
 //聚合代码到此结束
 
@@ -120,4 +119,8 @@ map.addLayer(vectorLayer);
   mapObj.addOverlay(marker);
 </script>
 ```
-<!-- [README](./README.md) -->
+
+## 说明
+Overlay Labels适合点较少的情况，因为毕竟是操作了dom，点一多界面就会卡顿。
+
+Vector Labels有个弊端，就是不能添加动画，而且src设为一张gif的图也没效果.(<span style="font-size: 12px">ps: 也可能是我没找到方法，试过用Vector Labels让mark点动起来的朋友可以告诉我一下.谢谢</span>)
