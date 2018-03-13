@@ -13,6 +13,7 @@ Git是一个开源的分布式版本控制系统，可以有效、高速的处�
 
 
 git和tortoise都安装完成后，在桌面右键会如下图所示：
+
 <img src="../../asset/images/git.png"/>
 
 <span style="color:grey;font-size:14px;">
