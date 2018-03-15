@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script src="jquery.min.js"></script>
+<style>
+	.linespan{
+		display: inline-block;
+		margin-left: -5px;
+		width: 50px;
+		height: 10px;
+		border-bottom: 1px solid black;
+		border-left: 1px solid black;
+	}
+	.linespan>span{
+		display: inline-block;
+		margin-top: 10px;
+	}
+
+	.outspan{
+		display: inline-block;
+		width: 60px;
+		height: 20px;
+		margin-left: -5px;
+		border-left: 1px solid black;
+		border-right: 1px solid black;
+		border-bottom: 1px solid black;
+	}
+	.shortline{
+		flex: 1;
+		display: inline-block;
+		height: 10px;
+		margin-top: 10px;
+		border-right: 1px solid black;
+	}
+	.scales{
+		display: inline-block;
+		margin: 10px 0 0 -60px;
+	}
+
+</style>
+<body>
+
+	<div style="text-align: center;margin-top: 90px;">
+		<div class="outspan">
+			<div style="display: flex;" id="1">
+				<span class="shortline" id="115"></span>
+				<span class="shortline" id="130"></span>
+				<span class="shortline" id="145"></span>
+				<span class="shortline" id="160" style="border: none;"></span>
+			</div>	
+			<span class="scales">1</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="2">
+				<span class="shortline" id="215"></span>
+				<span class="shortline" id="230"></span>
+				<span class="shortline" id="245"></span>
+				<span class="shortline" id="260" style="border: none;"></span>
+			</div>	
+			<span class="scales">2</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="3">
+				<span class="shortline" id="315"></span>
+				<span class="shortline" id="330"></span>
+				<span class="shortline" id="345"></span>
+				<span class="shortline" id="360" style="border: none;"></span>
+			</div>	
+			<span class="scales">3</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="4">
+				<span class="shortline" id="415"></span>
+				<span class="shortline" id="430"></span>
+				<span class="shortline" id="445"></span>
+				<span class="shortline" id="460" style="border: none;"></span>
+			</div>	
+			<span class="scales">4</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="5">
+				<span class="shortline" id="515"></span>
+				<span class="shortline" id="530"></span>
+				<span class="shortline" id="545"></span>
+				<span class="shortline" id="560" style="border: none;"></span>
+			</div>	
+			<span class="scales">5</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="6">
+				<span class="shortline" id="615"></span>
+				<span class="shortline" id="630"></span>
+				<span class="shortline" id="645"></span>
+				<span class="shortline" id="660" style="border: none;"></span>
+			</div>	
+			<span class="scales">6</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="7">
+				<span class="shortline" id="715"></span>
+				<span class="shortline" id="730"></span>
+				<span class="shortline" id="745"></span>
+				<span class="shortline" id="760" style="border: none;"></span>
+			</div>	
+			<span class="scales">7</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="8">
+				<span class="shortline" id="815"></span>
+				<span class="shortline" id="830"></span>
+				<span class="shortline" id="845"></span>
+				<span class="shortline" id="860" style="border: none;"></span>
+			</div>	
+			<span class="scales">8</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="9">
+				<span class="shortline" id="915"></span>
+				<span class="shortline" id="930"></span>
+				<span class="shortline" id="945"></span>
+				<span class="shortline" id="960" style="border: none;"></span>
+			</div>	
+			<span class="scales">9</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="10">
+				<span class="shortline" id="1015"></span>
+				<span class="shortline" id="1030"></span>
+				<span class="shortline" id="1045"></span>
+				<span class="shortline" id="1060" style="border: none;"></span>
+			</div>	
+			<span class="scales">10</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="11">
+				<span class="shortline" id="1115"></span>
+				<span class="shortline" id="1130"></span>
+				<span class="shortline" id="1145"></span>
+				<span class="shortline" id="1160" style="border: none;"></span>
+			</div>	
+			<span class="scales">11</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="12">
+				<span class="shortline" id="1215"></span>
+				<span class="shortline" id="1230"></span>
+				<span class="shortline" id="1245"></span>
+				<span class="shortline" id="1260" style="border: none;"></span>
+			</div>	
+			<span class="scales">12</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="13">
+				<span class="shortline" id="1315"></span>
+				<span class="shortline" id="1330"></span>
+				<span class="shortline" id="1345"></span>
+				<span class="shortline" id="1360" style="border: none;"></span>
+			</div>	
+			<span class="scales">13</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="14">
+				<span class="shortline" id="1415"></span>
+				<span class="shortline" id="1430"></span>
+				<span class="shortline" id="1445"></span>
+				<span class="shortline" id="1460" style="border: none;"></span>
+			</div>	
+			<span class="scales">14</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="15">
+				<span class="shortline" id="1515"></span>
+				<span class="shortline" id="1530"></span>
+				<span class="shortline" id="1545"></span>
+				<span class="shortline" id="1560" style="border: none;"></span>
+			</div>	
+			<span class="scales">15</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="16">
+				<span class="shortline" id="1615"></span>
+				<span class="shortline" id="1630"></span>
+				<span class="shortline" id="1645"></span>
+				<span class="shortline" id="1660" style="border: none;"></span>
+			</div>	
+			<span class="scales">16</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="17">
+				<span class="shortline" id="1715"></span>
+				<span class="shortline" id="1730"></span>
+				<span class="shortline" id="1745"></span>
+				<span class="shortline" id="1760" style="border: none;"></span>
+			</div>	
+			<span class="scales">17</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="18">
+				<span class="shortline" id="1815"></span>
+				<span class="shortline" id="1830"></span>
+				<span class="shortline" id="1845"></span>
+				<span class="shortline" id="1860" style="border: none;"></span>
+			</div>	
+			<span class="scales">18</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="19">
+				<span class="shortline" id="1915"></span>
+				<span class="shortline" id="1930"></span>
+				<span class="shortline" id="1945"></span>
+				<span class="shortline" id="1960" style="border: none;"></span>
+			</div>	
+			<span class="scales">19</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="20">
+				<span class="shortline" id="2015"></span>
+				<span class="shortline" id="2030"></span>
+				<span class="shortline" id="2045"></span>
+				<span class="shortline" id="2060" style="border: none;"></span>
+			</div>	
+			<span class="scales">20</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="21">
+				<span class="shortline" id="2115"></span>
+				<span class="shortline" id="2130"></span>
+				<span class="shortline" id="2145"></span>
+				<span class="shortline" id="2160" style="border: none;"></span>
+			</div>	
+			<span class="scales">21</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="22">
+				<span class="shortline" id="2215"></span>
+				<span class="shortline" id="2230"></span>
+				<span class="shortline" id="2245"></span>
+				<span class="shortline" id="2260" style="border: none;"></span>
+			</div>	
+			<span class="scales">22</span>
+		</div>
+		<div class="outspan">
+			<div style="display: flex;" id="23">
+				<span class="shortline" id="2315"></span>
+				<span class="shortline" id="2330"></span>
+				<span class="shortline" id="2345"></span>
+				<span class="shortline" id="2360" style="border: none;"></span>
+			</div>	
+			<span class="scales">23</span>
+		</div>
+		<div class="outspan" style="border: none;">
+			<span class="scales">24</span>
+		</div>
+	</div>
+
+
+
+	<div style="text-align: center;margin-top: 120px;">
+		<span class="linespan" id="1h">
+			<span>1</span>
+		</span>
+		<span class="linespan" id="2h">
+			<span>2</span>
+		</span>
+		<span class="linespan" id="3h" title="hahaha&#10;hashdas">
+			<span>3</span>
+		</span>
+		<span class="linespan" id="4h">
+			<span>4</span>
+		</span>
+		<span class="linespan" id="5h">
+			<span>5</span>
+		</span>
+		<span class="linespan" id="6h">
+			<span>6</span>
+		</span>
+		<span class="linespan" id="7h">
+			<span>7</span>
+		</span>
+		<span class="linespan" id="8h">
+			<span>8</span>
+		</span>
+		<span class="linespan" id="9h">
+			<span>9</span>
+		</span>
+		<span class="linespan" id="10h">
+			<span>10</span>
+		</span>
+		<span class="linespan" id="11h">
+			<span>11</span>
+		</span>
+		<span class="linespan" id="12h">
+			<span>12</span>
+		</span>
+		<span class="linespan" id="13h">
+			<span>13</span>
+		</span>
+		<span class="linespan" id="14h">
+			<span>14</span>
+		</span>
+		<span class="linespan" id="15h">
+			<span>15</span>
+		</span>
+		<span class="linespan" id="16h">
+			<span>16</span>
+		</span>
+		<span class="linespan" id="17h">
+			<span>17</span>
+		</span>
+		<span class="linespan" id="18h">
+			<span>18</span>
+		</span>
+		<span class="linespan" id="19h">
+			<span>19</span>
+		</span>
+		<span class="linespan" id="20h">
+			<span>20</span>
+		</span>
+		<span class="linespan" id="21h">
+			<span>21</span>
+		</span>
+		<span class="linespan" id="22h">
+			<span>22</span>
+		</span>
+		<span class="linespan" id="23h">
+			<span>23</span>
+		</span>
+		<span class="linespan" style="border-right: 1px solid black;" id="24h">
+			<span>24</span>
+		</span>
+	</div>
+
+	<script>
+		$(function() {
+			$('#115').css({"height": "20px"});
+			$('#130').css({"height": "20px"});
+			$('#115').css({"margin-top": "0"});
+			$('#130').css({"margin-top": "0"});
+			$('#115').css({"background-color": "black"});
+			$('#130').css({"background-color": "black"});
+		})
+		//第一版	
+		$(function() {
+			$('#3h').css("background-color", "black");
+			$('#4h').css("background-color", "black");
+			$('#9h').css("background-color", "black");
+			$('#10h').css("background-color", "black");
+		})
+	</script>
+</body>
+</html>
