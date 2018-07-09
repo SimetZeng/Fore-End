@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../jquery.js"></script>
+    <script src="vis-4.21.0/dist/vis.js"></script>
+    <link href="vis-4.21.0/dist/vis.css" rel="stylesheet" type="text/css" />
+
+    <style>
+		 #mynetwork {
+	      width: 800px;
+	      height: 600px;
+	      margin: 0 auto;
+	      border: 1px solid lightgray;
+	    } 
+	    #node-popUp {
+	      display:none;
+	      position:absolute;
+	      top:350px;
+	      left:170px;
+	      z-index:299;
+	      width:250px;
+	      height:120px;
+	      background-color: #f9f9f9;
+	      border-style:solid;
+	      border-width:3px;
+	      border-color: #5394ed;
+	      padding:10px;
+	      text-align: center;
+	    }
+	    #edge-popUp {
+	      display:none;
+	      position:absolute;
+	      top:350px;
+	      left:170px;
+	      z-index:299;
+	      width:250px;
+	      height:90px;
+	      background-color: #f9f9f9;
+	      border-style:solid;
+	      border-width:3px;
+	      border-color: #5394ed;
+	      padding:10px;
+	      text-align: center;
+	    }
+    </style>
+</head>
+<body>
+	<button id="drag1" draggable="true" ondragstart="drag(event)">
+		康熙
+		<span class="img-path" style="display:none;">imgs/yz.jpg</span>
+	</button>
+
+	<button onclick="getResult()">获取最终结果</button>
+
+	<div id="node-popUp">
+	  	<span id="node-operation">节点</span> <br>
+	  	<table style="margin:auto;">
+	    	<tr>
+	      		<td>id</td><td><input id="node-id" value="new value" /></td>
+	    	</tr>
+	    	<tr>
+	      		<td>label</td><td><input id="node-label" value="new value" /></td>
+	    	</tr>
+	  	</table>
+	  	<input type="button" value="save" id="node-saveButton" />
+	  	<input type="button" value="cancel" id="node-cancelButton" />
+	</div>
+
+	<div id="edge-popUp">
+	  	<span id="edge-operation">关联</span> <br>
+	  	<table style="margin:auto;">
+	    	<tr>
+	      		<td>label</td><td><input id="edge-label" value="new value" /></td>
+	    	</tr>
+	    </table>
+	  	<input type="button" value="确定" id="edge-saveButton" />
+	  	<input type="button" value="取消" id="edge-cancelButton" />
+	</div>
+	<div id="mynetwork" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+	<script>
+		// create an array with nodes
+		var nodes = new vis.DataSet([
+		    {id: 1, label: '雍正', shape: 'circularImage', image: 'imgs/yz.jpg', color: 'grey'},
+		    {id: 2, label: '乾隆', shape: 'circularImage', image: 'imgs/ql.jpg', color: 'grey'},
+		    {id: 3, label: '华妃', shape: 'circularImage', image: 'imgs/hf.jpg', color: 'grey'},
+		    {id: 4, label: '年羹尧', shape: 'circularImage', image: 'imgs/ngy.jpg', color: 'grey'},
+		    {id: 5, label: '乌拉那拉氏', shape: 'circularImage', image: 'imgs/wlnls.jpg', color: 'grey'}
+		]);
+
+		// create an array with edges
+		var edges = new vis.DataSet([
+		    {from: 1, to: 3, label: '夫妻', font: {align: 'middle'}},
+		    {from: 1, to: 2, label: '父子', font: {align: 'middle'}},
+		    {from: 3, to: 4, label: '兄妹', font: {align: 'middle'}},
+		    {from: 1, to: 5, label: '夫妻', font: {align: 'middle'}}	
+		]);
+
+		// create a network
+		var container = document.getElementById('mynetwork');
+		var data = {
+		    nodes: nodes,
+		    edges: edges
+		};
+		var options = {
+			autoResize: true,
+			locale: 'cn',
+		    locales: {
+		        cn: {
+		            edit: '改',
+		            del: '删除选定',
+		            back: '返回',
+		            addNode: '添加节点',
+		            addEdge: '添加关联',
+		            editNode: '编辑节点',
+		            editEdge: '编辑关联',
+		            addDescription: '单击空白处来放置一个新节点。',
+		            edgeDescription: '单击一个节点并拖动到另一个节点以连接它们。',
+		            editEdgeDescription: '单击控制点并将其拖动到节点以连接到它。',
+		            createEdgeError: '无法将边缘链接到集群。',
+		            deleteClusterError: '不能删除集群。',
+		            editClusterError: '不能编辑集群。'
+		        }
+		    },
+	        nodes: {
+	            borderWidth: 2,
+	            shadow:true
+	        },
+	        edges: {
+	            width: 1,
+	            shadow:true
+	        },
+			interaction:{hover:true},
+			manipulation: {
+                enabled: true,
+                addNode: function (data, callback) {
+		            document.getElementById('node-operation').innerHTML = "添加节点";
+		            editNode(data, clearNodePopUp, callback);
+	          	},
+		        editNode: function (data, callback) {
+		            document.getElementById('node-operation').innerHTML = "编辑节点";
+		            editNode(data, cancelNodeEdit, callback);
+		        },
+                addEdge: function (data, callback) {
+		            if (data.from == data.to) {
+		              var r = confirm("确定要连接节点本身吗?");
+		              if (r != true) {
+		                callback(null);
+		                return;
+		              }
+		            }
+		            document.getElementById('edge-operation').innerHTML = "添加关联";
+		            editEdgeWithoutDrag(data, callback);
+	          	},
+		        editEdge: {
+		            editWithoutDrag: function(data, callback) {
+		              document.getElementById('edge-operation').innerHTML = "编辑关联";
+		              editEdgeWithoutDrag(data,callback);
+		            }
+		        }
+            }
+		};
+		
+		var network = new vis.Network(container, data, options);
+
+		/**编辑节点*/
+		function editNode(data, cancelAction, callback) {
+		    document.getElementById('node-label').value = data.label;
+		    document.getElementById('node-saveButton').onclick = saveNodeData.bind(this, data, callback);
+		    document.getElementById('node-cancelButton').onclick = cancelAction.bind(this, callback);
+		    document.getElementById('node-popUp').style.display = 'block';
+	    }
+	    function clearNodePopUp() {
+	        document.getElementById('node-saveButton').onclick = null;
+	        document.getElementById('node-cancelButton').onclick = null;
+	        document.getElementById('node-popUp').style.display = 'none';
+	    }
+	    function cancelNodeEdit(callback) {
+	        clearNodePopUp();
+	        callback(null);
+	    }
+	    function saveNodeData(data, callback) {
+	      data.label = document.getElementById('node-label').value;
+	      clearNodePopUp();
+	      callback(data);
+	    }
+
+		/**编辑关联*/
+		function editEdgeWithoutDrag(data, callback) {
+	      document.getElementById('edge-label').value = data.label;
+	      document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
+	      document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this,callback);
+	      document.getElementById('edge-popUp').style.display = 'block';
+	    }
+	    function clearEdgePopUp() {
+	      document.getElementById('edge-saveButton').onclick = null;
+	      document.getElementById('edge-cancelButton').onclick = null;
+	      document.getElementById('edge-popUp').style.display = 'none';
+	    }
+	    function cancelEdgeEdit(callback) {
+	      clearEdgePopUp();
+	      callback(null);
+	    }
+	    function saveEdgeData(data, callback) {
+	      if (typeof data.to === 'object')
+	        data.to = data.to.id
+	      if (typeof data.from === 'object')
+	        data.from = data.from.id
+	      data.label = document.getElementById('edge-label').value;
+	      clearEdgePopUp();
+	      callback(data);
+	    }
+        
+	    /**拖动*/
+		function allowDrop(ev) {
+		    ev.preventDefault();
+		}
+		function drag(ev) {
+			console.log($(ev.target)[0].innerText);
+			console.log($(ev.target).find(".img-path")[0].innerText);
+		    ev.dataTransfer.setData("text", ev.target.id);
+		}
+		function drop(ev) {
+		    ev.preventDefault();
+		    network.body.data.nodes.add([
+		    	{id: 6, label: '康熙', shape: 'circularImage', image: 'imgs/kx.jpg', color: 'red'},
+	    	]);
+		}
+
+
+		function getResult () {
+			console.log(nodes);
+			console.log(edges);
+		}
+	</script>
+</body>
+</html>
