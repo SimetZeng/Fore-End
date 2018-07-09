@@ -38,7 +38,7 @@
 
 <!-- /TOC -->
 # 概述
-Kotlin 是一个基于 JVM 的新的编程语言，由 JetBrains 开发。Kotlin已正式成为Android官方支持开发语言。
+Kotlin 是一个基于 JVM(java虚拟机) 的新的编程语言，由 JetBrains 开发。2017 Google I/O 大会将Kotlin正式认定为Android一级开发语言。
 
 # kotlin常用操作符及用法
 ## ?
@@ -160,7 +160,7 @@ class User {
 - <span style="color:red">var userInfo = "name:${user.name},  age:$age"</span>
 
 
-# 数据类型
+# 词法-基础语法
 
 ## Boolean
   - <span style="color:red">val aBoolean: Boolean = true</span>
@@ -200,7 +200,7 @@ class User {
   - 对象是一个具体的概念，与类相对
   - 描述某一种类的具体个体
 - 类与对象的关系
-  - 一个雷通常可以有很多个具体的对象
+  - 一个类通常可以有很多个具体的对象
   - 一个对象本质上只能从属与一个类
   - 对象也经常被称为“类的对象”或“类的实例”
     - 城市-北京、上海、广州

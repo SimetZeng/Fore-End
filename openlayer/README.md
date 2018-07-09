@@ -1,24 +1,15 @@
-
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [openlayer - Web Gis 引擎](#openlayer-web-gis-引擎)
-
-<!-- /TOC -->
 # openlayer - Web Gis 引擎
-
-***
 
 # 概述
 OpenLayers 3简称ol3，是一个开源的Web GIS引擎，使用了JavaScript、HTML5及CSS3技术。在地图数据源方面，支持各种类型的瓦片地图，既支持在线的，也支持离线的。
 
-***
+
 # 支持浏览器
-***
+
 由于OpenLayers 3使用了HTML5技术，所以对各种浏览器的版本有所要求。IE浏览器最低需要IE9，IE9以下的浏览器可以考虑使用OpenLayers 2。其他浏览器的最低版本要求：Firefox 3.5，Chrome 3.0，Safari 3.0，Opera 10.5。
 
 # 'Hello World'
 
-***
 ```
 //想要使用OpenLayers 3，首先你需要引入了ol3的js库文件ol.js及样式文件ol.css。
 <link ref="stylesheet" href="./ol.ol.css" type="text/css"></link>
